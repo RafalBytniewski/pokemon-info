@@ -13,7 +13,7 @@ class BannedPokemonController extends Controller
     public function index()
     {
         return View('banned', [
-            'bannedPokemons' => BannedPokemon::get()    
+            'bannedPokemons' => BannedPokemon::get()
         ]);
     }
 
@@ -30,7 +30,11 @@ class BannedPokemonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BannedPokemon::create([
+            'name' => $request->input('name')
+        ]);
+
+        return redirect()->route('banned.index');
     }
 
     /**
@@ -60,8 +64,9 @@ class BannedPokemonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BannedPokemon $bannedPokemon)
+    public function destroy(string $name)
     {
-        //
+        BannedPokemon::where('name', $name)->delete();
+        return redirect()->route('banned.index');
     }
 }
