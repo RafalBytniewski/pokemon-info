@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
          $middleware->alias([
             'secret.key' => CheckSecretKey::class,
     ]);
+    
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
